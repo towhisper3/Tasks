@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拼图</title>
+    <style>
+        body,ul{margin: 0;padding: 0;}
+         
+        #ul{
+             width: 308px;
+             height: 306px;
+             background: lemonchiffon;
+             border: 4px solid #000;/*边框*/
+             border-radius: 4px;/*半径*/
+             margin: 100px auto;
+             padding-top: 2px;
+             position: relative;
+           }
+          #ul li{
+                width: 100px;
+                height: 100px;
+                background: pink;
+                float: left;
+                list-style-type: none;
+                margin: 0 0 2px 2px;
+                }
+           #ul li.active{
+                         background:lemonchiffon;
+                        }
+         
+     </style>
+</head>
+<body>
+    <ul id="ul">
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li  class="active"></li>
+    </ul>
+</body>
+</html>
