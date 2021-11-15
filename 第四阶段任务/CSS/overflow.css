@@ -1,0 +1,13 @@
+div.box1{
+    height: 300px;
+    width: 300px;
+    border: 1px solid red;
+    overflow: hidden;
+    overflow-y: auto;
+}
+/*
+   overflow: visible;  //默认超出部分可见
+   overflow: hidden;   //超出部分隐藏
+   overflow: scroll;   //设置滚动条
+   overflow: outo;     //自适应
+*/
