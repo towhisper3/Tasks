@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - collection
   - enemies
+  - deadline
+  - cherry
+  - gem
   layers:
   - Default
   - TransparentFX

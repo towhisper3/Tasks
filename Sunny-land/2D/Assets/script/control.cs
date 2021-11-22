@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
+//using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class control : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,20 +14,22 @@ public class control : MonoBehaviour
     public BoxCollider2D Bc;
     public LayerMask Ground;
     private bool ishurt;
-    public health health;
+    public health health;//health脚本
     public Transform toppoint;
     public GameObject bullet;
+    public GameObject collected;//被收集的动画
     private Rigidbody2D bullet_rb;
     public AudioSource fireAudio;
     public AudioSource jumpAudio;
     public AudioSource hurtAudio;
     public AudioSource eat;
+    public Animator fruit_anim;
+    
 
     // Update is called once per frame
 
     void Update()
     {
-        Fire();
         if (!ishurt)
         {
             Movement();
@@ -51,6 +53,8 @@ public class control : MonoBehaviour
 
         Jump();
         crouch();
+        Fire();
+        addHealth();
     }
     void SwitchAnimation()
     {
@@ -82,14 +86,22 @@ public class control : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)//收集
     {
-        if (collision.tag == "collection")
+      
+        if (collision.tag == "cherry")
         {
-            eat.Play();
-            health.Addhealth();
             Destroy(collision.gameObject);
+            GameObject collect = GameObject.Instantiate(collected, collision.transform.position, collision.transform.rotation);
+            eat.Play();//音效
+            health.cherryNum++;
+        }
+        else if(collision.tag == "gem")
+        {
+            Destroy(collision.gameObject);
+            GameObject collect = GameObject.Instantiate(collected, collision.transform.position, collision.transform.rotation);
+            eat.Play();//音效
+            health.gemNum++;
         }
     }
-
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "enemies")
@@ -116,7 +128,10 @@ public class control : MonoBehaviour
                 ishurt = true;
                 anim.SetBool("hurt", true);
             }
-
+        }
+        if (collision.gameObject.tag == "deadline")
+        {
+            Invoke("reset",1f);
         }
        
     }
@@ -153,7 +168,7 @@ public class control : MonoBehaviour
 
     void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1")&&Time.timeScale==1)
         {
             float face = transform.localScale.x;
             Vector3 start = transform.position + new Vector3(1f*face, -0.3f, 0);
@@ -165,12 +180,26 @@ public class control : MonoBehaviour
             bullet_rb.transform.rotation = Quaternion.Euler(0, 0, 90f*face);
         }
     }
+    void addHealth()
+    {
+        if (Input.GetButtonDown("addHealth"))
+        {
+            health.Addhealth();
+        }
+    }
 
     public void Dead()//角色死亡
     {
         if (health.healthNum == 0)
         {
-            Destroy(gameObject);
+            Cc.enabled = false;
+            Bc.enabled = false;
+            Invoke("reset", 1f);
         }
+        
+    }
+    public void reset()//重新开始
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
