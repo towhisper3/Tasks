@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#GPS{
+    margin: auto;
+    left:  0; right: 0;
+    width: 95%;
+    height: 10%;
+    position: fixed;
+    min-width: 1000px;
+}
+ul{
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background-color:rgb(255, 243, 193);
+}
+li{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 11px;
+    padding-left: 5px;
+    padding-right: 5px;
+    list-style-type: none;
+    font:22px "楷体";
+    font-weight: 500;
+    float: left;
+}
+.l3{
+    right: 0;
+    left: 0;
+    font: 35px "微软雅黑";
+    font-weight: 1000;
+}
+.l5{
+    padding-left: 30px;
+}
+#first{
+    width: 100%;
+    background: url("./Image/首页背景.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+.geek{
+     width: 40%;
+     margin-bottom: 40%;
+     margin-top: 8%;
+     margin-left: 30%;
+}
+.geek:hover{
+    transform: scale(1.2);
+    left: 20%;
+}
+#second{
+    width:100%;
+}
+
+
+
+
+
+/*超链接样式*/
+a{
+    text-decoration: none;
+   }
+   a:link{
+    color: rgb(92, 93, 95);
+         }
+   a:visited{
+    color: rgb(92, 93, 95);
+   }
+   
+   a:hover{
+       color: white;
+   }
