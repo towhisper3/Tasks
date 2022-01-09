@@ -290,7 +290,7 @@ while 条件表达式:
 
 3.  连接用 “  +  ”
 
-## 6.列表
+## 6.列表（list）
 
 ### 1.写法
 
@@ -298,8 +298,11 @@ while 条件表达式:
 
 - 写在方括号[]之间,用逗号分隔开的元素列表。
 
-- 列表索引值以0为开始值，-1为末尾的开始位置。
+~~~python
+list = [元素1，元素2，元素3...]
+~~~
 
+- 列表索引值以0为开始值，-1为末尾的开始位置。
 - 列表可以使用+操作符进行拼接，使用*操作符进行重复。
 
 ### 2.方法
@@ -436,6 +439,8 @@ while 条件表达式:
      print(num)
      #输出结:[8,6,5,4,3,2,0]
      ~~~
+     
+     key
 
 4. #### 查
 
@@ -657,25 +662,405 @@ num = [0 for i in range(4)]
 [expression for target in iterable if codition]
 ~~~
 
+例子：
 
+~~~python
+num = [i for i in range(10) if i%2==0]
+#[0,2,4,6,8]
+~~~
 
+3. 进阶格式2
 
+~~~python
+[expression for target1 in iterable1
+            for target2 in iterable2
+                     ...
+            for targetN in iterableN]
+~~~
 
+4. 终极格式
 
+~~~python
+[expression for target1 in iterable1 if condition1
+            for target2 in iterable2 if condition2
+                     ...
+            for targetN in iterableN if conditionN]
+~~~
 
+### 7.切片
 
+  切片返回切片对象的子序列，子序列的元素是原版的拷贝
 
+  切片是一种浅拷贝
 
+1. 索引
 
+   - 正向索引
 
+     0，1，2，3，4...
 
+   - 负向索引
 
+     ...-4，-3，-2，-1
 
+2. 格式
 
+~~~python
+列表名[开始索引:终止索引:步进值]
+list[start:end:step]
+~~~
 
+- 可以没有步进值部分
+- 从start开始到end结束，但是不包括end，end省略则包括end
 
+~~~python
+num = [2,4,2,7,5,4]
+num1 = num[0:-1]
+num2 = num[0:]
+#num1 = [2,4,2,7,5]
+#num2 = [2,4,2,7,5,4]
+~~~
 
+- 步进值为负数，则逆向（从右往左）步进(此时start应在end之后)
 
+~~~python
+num = [2,4,2,7,5,3]
+num1 = num[4:1:-1]
+#num1 = [5,7,2]
+#若开始索引与终止索引的方向与步进值的方向相反，则切片的结果是[]
+~~~
 
+- 开始位置或者终止位置不指定，则由步进值的正负（方向）决定
 
+~~~python
+num = [2,4,2,7,6,5,3]
+num1 = num[:3:-1] #步进值为负，则从右边开始
+num2 = num[:3:1] #步进值为整，则从左边开始
+#num1 = [3, 5, 6]
+#num2 = [2, 4, 2]
+~~~
 
+​                开始和结束位置都不指定，则取整个列表（方向由步进值决定）
+
+~~~python
+num = [2,4,2,7,6,5,3]
+num1 = num[::-1]
+num2 = num[::1]
+#[3, 5, 6, 7, 2, 4, 2]
+#[2, 4, 2, 7, 6, 5, 3]
+~~~
+
+## 7.元组（tuple）
+
+### 1.写法
+
+- 格式
+
+~~~python
+tuple = (元素1，元素2，元素3...)
+~~~
+
+- 元组中的元素可以是任意数据类型
+- 元组内的元素不可改变
+- 元组中的列表的元素可以改变
+- 创建只有一个元素的元组
+
+~~~python
+tuple = ('w')
+print(type(tuple))
+#<class 'str'>  这样创建出来的是字符型
+
+tuple = ('w',)
+print(type(tuple))
+#<class 'tuple'>
+~~~
+
+#### 2.方法
+
+​         同列表的index(),和count()方法，del()方法只能用于删除整个元组
+
+#### 3.运算
+
+​        同列表的运算
+
+#### 4.切片
+
+​        同列表的切片
+
+- 利用切片和连接修改元组
+
+  1. 添加
+
+  ~~~python
+  num = (1,2,4,5)
+  num = num[:2] + (3,) + num[2:]
+  #num = [1,2,3,4,5]
+  ~~~
+
+  2. 删除
+
+  ~~~python
+  num = (1,2,3,3,4)
+  num = num[:2] + num[3:]
+  #num = [1,2,3,4]
+  ~~~
+
+### 5.打包,解包
+
+- 打包
+
+~~~python
+a =2
+b = 'ab'
+c = [6,4]
+tuple = a,b,c
+print(tuple)
+#(2,'ab',[6,4])
+~~~
+
+- 解包
+
+~~~python
+tuple = (2, 'ab', [6, 4])
+a,b,c = tuple
+print(a,b,c)
+#2 ab [6, 4]
+~~~
+
+## 8.序列
+
+字符串，列表，元组都是序列
+
+- 都可以通过索引获取每一个元素
+- 第一个元素的索引值都是0
+- 都可以通过切片获得一定范围内元素的集合
+- 都有很多共同的运算符
+
+### 1.能作用于序列的运算符和函数
+
+1. #### '+'  '*'
+
+- "+"用于连接两个同类型序列
+
+- "*"用于复制序列
+
+2. #### id()
+
+   id()返回对象的唯一标志
+
+   修改可变对象的值id不会被改变
+
+   修改不可变对象的值会被改变
+
+   - 字符串，列表是可变序列
+   - 元组是不可变序列
+
+~~~python
+num = [1,2]
+print(id(num))
+num.append(1)
+print(id(num))
+#73102664
+#73102664
+
+num = (1,2)
+print(id(num))
+num *=2
+print(id(num)) 
+#88229864
+#88240288
+~~~
+
+3. #### is和is not
+
+   用于检测两个对象的唯一标识是否相等
+
+~~~python
+x = "Geek"
+y = "Geek"
+print(x is y)
+print(x is not y)
+#True
+#False
+~~~
+
+~~~python
+import copy
+num1 = [1,2,3]
+num2 = [1,2,3]
+num3 = num1
+num4 = copy.deepcopy(num1)
+num5 = num1.copy()
+print(num1 is num2)
+print(num1 is num3)
+print(num1 is num4)
+print(num1 is num5)
+#False
+#True
+#False
+#False
+~~~
+
+4. #### in和not in
+
+   判断某个元素是否包含在序列中
+
+~~~python
+print('G' in 'Geek')
+print('G' not in 'Geek')
+#True
+#False
+~~~
+
+5. #### del()
+
+​                见序列del（）
+
+### 2.跟序列相关的函数
+
+1. #### list(),tuple(),str()
+
+   用于三种序列之间的相互转化
+
+~~~python
+list1 = ['a',11,'b']
+str1 = str(list1)
+tuple1 = tuple(str1)
+print(str1,tuple1) 
+#['a', 11, 'b'] ('[', "'", 'a', "'", ',', ' ', '1', '1', ',', ' ', "'", 'b', "'", ']')
+~~~
+
+2. #### min()&max()
+
+- 函数原型
+
+~~~p
+min(iterable,*[,key,default])
+min(arg1,arg2,*args[,key])
+~~~
+
+~~~python
+max(iterable,*[,key,default])
+max(arg1,arg2,*args[,key])
+~~~
+
+- 字符按码排序，大写字母在小写之前
+
+~~~python
+num = [2,4,2,6,4,7,8,5]
+print(min(num),max(num))
+str = 'aBcder'
+print(min(str),max(str))
+#2 8
+#B r
+~~~
+
+- default后可以加上失败的返回值
+
+~~~python
+num = [1,2]
+num.clear()
+print(max(num,default="啥都没有"))
+#啥都没有
+~~~
+
+3. #### len()&sum()
+
+- len()计算序列的长度
+- sum()计算序列元素的和
+
+4. #### sorted()&reversed()
+
+- sorted()函数，与列表的sort()方法不同之处在于，列表的sort()直接对列表本身排序
+
+  而sorted函数生成一个全新的列表
+
+~~~python
+num = [2,5,3,6,2,4]
+sorted(num)
+print(num)
+num.sort()
+print(num)
+#[2, 5, 3, 6, 2, 4]
+#[2, 2, 3, 4, 5, 6]
+~~~
+
+- reversed()返回一个反向迭代器
+
+~~~python
+num = [2,5,3,6,2,4]
+print(list(reversed(num)))
+#[4,2,6,3,5,2]
+~~~
+
+5. #### all()&any()
+
+- all()判断可迭代对象中是否所有元素都为真
+- any()判断可迭代对象中是否存在元素为真
+
+6. #### enumerate()
+
+## 9.字典
+
+### 1.写法
+
+~~~python
+dict = {"key":"value","key1":"value"}
+~~~
+
+key：键   value：值 映射： 键值对
+
+### 2.操作
+
+1. 查
+
+- 提供‘键’，返回‘值’
+
+~~~python
+dict = {"刘备":"1","关羽":"2","张飞":"3"}
+print(dict["刘备"])
+#1
+~~~
+
+- get()
+
+~~~python
+dict = {"刘备":"1","关羽":"2","张飞":"3"}
+print(dict.get("刘备"))
+#1
+~~~
+
+- keys(),values(),items()
+
+  keys()返回所有键
+
+  values返回所有值
+
+  items返回所有键值对
+
+2. 增
+
+~~~python
+dict = {"刘备":"1","关羽":"2","张飞":"3"}
+dict["诸葛亮"] = "4"
+print(dict.items())
+#dict_items([('刘备', '1'), ('关羽', '2'), ('张飞', '3'), ('诸葛亮', '4')])
+~~~
+
+3. 删
+
+~~~python
+del dict["key"]   #会删除键值对
+del dict          #删除整个字典
+dict.clear        #清空字典
+~~~
+
+4. 改
+
+~~~python
+dict["key"] = "value"
+~~~
+
+## 10.
+
+  
